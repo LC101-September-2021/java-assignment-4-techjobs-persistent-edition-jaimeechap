@@ -1,6 +1,11 @@
 -- Part 1: Test it with SQL
+SELECT DATA_TYPE, COLUMNS
+FROM job
 
 -- Part 2: Test it with SQL
+SELECT name
+FROM employer
+WHERE (name = "St. Louis City")
 
 -- Part 3: Test it with SQL
 
