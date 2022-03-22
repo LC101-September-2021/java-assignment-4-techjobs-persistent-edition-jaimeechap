@@ -18,11 +18,11 @@ public class EmployerController {
     @Autowired
     private EmployerRepository employerRepository;
 
-    @GetMapping("employers")
+    @GetMapping("/employers")
     public String displayEmployerIndex(Model model) {
-//        model.addAttribute("title", "All Employers");
+        model.addAttribute("title", "All Employers");
         model.addAttribute(employerRepository.findAll());
-        return "employers";
+        return "/employers";
     }
 
     @GetMapping("add")
@@ -39,9 +39,11 @@ public class EmployerController {
             return "employers/add";
         }
 
-        model.addAttribute(employerRepository.save(newEmployer));
-//            return "redirect:";
-        return "employers/add";
+//        employerRepository.save(newEmployer);
+        model.addAttribute( employerRepository.save(newEmployer));
+            return "redirect:/add";
+//        return "employers/add";
+//        return "add";
     }
 
     @GetMapping("view/{employerId}")
@@ -55,5 +57,13 @@ public class EmployerController {
         } else {
             return "redirect:../";
         }
+    }
+
+    public void setEmployerRepository(EmployerRepository employerRepository) {
+        this.employerRepository = employerRepository;
+    }
+
+    public EmployerRepository getEmployerRepository() {
+        return employerRepository;
     }
 }

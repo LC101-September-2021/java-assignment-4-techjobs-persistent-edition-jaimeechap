@@ -15,14 +15,15 @@ import java.util.Optional;
 @RequestMapping("skills")
 public class SkillController {
 
+
     @Autowired
     private SkillRepository skillRepository;
 
-    @GetMapping("skills")
+    @GetMapping("/skills")
     public String displaySkillIndex(Model model) {
-//        model.addAttribute("title", "All Skills");
+        model.addAttribute("title", "All Skills");
         model.addAttribute(skillRepository.findAll());
-        return "skills";
+        return "/skills";
     }
 
     @GetMapping("add")
@@ -39,9 +40,10 @@ public class SkillController {
             return "skills/add";
         }
 
+//        skillRepository.save(newSkill);
         model.addAttribute(skillRepository.save(newSkill));
-//        return "redirect:";
-        return "skills/add";
+        return "redirect:/add";
+//        return "add";
     }
 
     @GetMapping("view/{skillId}")
@@ -55,5 +57,13 @@ public class SkillController {
         } else {
             return "redirect:../";
         }
+    }
+
+    public void setSkillRepository(SkillRepository skillRepository) {
+        this.skillRepository = skillRepository;
+    }
+
+    public SkillRepository getSkillRepository() {
+        return skillRepository;
     }
 }
